@@ -220,7 +220,7 @@ Get-ChildItem $sv *.pdf -Recurse | Sort-Object -Property CreationTime -Descendin
 ForEach-Object {
     $dirname = (Get-ItemProperty $_.FullName).Directory.Name
     $crttm = (Get-ItemProperty $_.FullName).CreationTime.ToString("yyyyMMdd-HHmm") 
-    $newname = 'SVReport_{0}_{1}.pdf' -f $dirname, $crttm
+    $newname = 'SVReport_{0}_{1}_{2}.pdf' -f $env:COMPUTERNAME,$dirname,$crttm
     Rename-Item $_.fullname -NewName $newname
     $path = $_.directoryname + '\' + $newname
     Copy-Item $path $dest
